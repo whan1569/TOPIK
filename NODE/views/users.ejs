@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <% user.forEach(item => {
+    const { id } = item;
+    %>
+    <a href="users"><%=id%></a>
+    <br>
+    <%})%>
+    <a href="users/users_insert">User Insert</a>
+    <br>
+  </body>
+</html>
