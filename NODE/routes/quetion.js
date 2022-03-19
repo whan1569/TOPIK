@@ -5,7 +5,7 @@ var router = express.Router();
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/question');
+    cb(null, './public/quetion');
   },
   filename: function (req, file, cb) {
     cb(null, req.body.code+'.png');
@@ -23,7 +23,7 @@ router.get('/quetion_insert', function(req, res, next) {
 
 router.post('/quetion_insert', upload.single('file'),async function(req, res, next) {
   const {code,num1,num2,num3,num4,answ} = req.body;
-  await dbcon("INSERT INTO question(code,num1,num2,num3,num4,answ) VALUES (?,?,?,?,?,?);", [code,num1,num2,num3,num4,answ]);
+  await dbcon("INSERT INTO quetion(code,num1,num2,num3,num4,answ) VALUES (?,?,?,?,?,?);", [code,num1,num2,num3,num4,answ]);
   res.redirect("/");
 });
 
