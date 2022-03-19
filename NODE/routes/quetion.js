@@ -21,7 +21,7 @@ router.get('/quetion_insert', function(req, res, next) {
   res.render('quetion_insert', { title: 'quetion_insert' });
 });
 
-router.post('/quetion_insert', upload.single('file'),async function(req, res, next) {
+router.post('/quetion_insert',/* upload.single('file'),*/async function(req, res, next) {
   const {code,num1,num2,num3,num4,answ} = req.body;
   await dbcon("INSERT INTO quetion(code,num1,num2,num3,num4,answ) VALUES (?,?,?,?,?,?);", [code,num1,num2,num3,num4,answ]);
   res.redirect("quetion_insert");
