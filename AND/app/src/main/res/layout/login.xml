@@ -13,18 +13,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <Button
-                android:id="@+id/login_bt"
+                android:id="@+id/join_bt"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="#ffffff"
-                android:text="로그인"
+                android:text="회원가입"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center" />
         </LinearLayout>
-
-
     </LinearLayout>
-
 </RelativeLayout>
