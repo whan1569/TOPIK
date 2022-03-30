@@ -27,4 +27,9 @@ router.post('/quetion_insert',/* upload.single('file'),*/async function(req, res
   res.redirect("quetion_insert");
 });
 
+router.get('/quetion_list',/* upload.single('file'),*/async function(req, res, next) {
+  console.log('ok');
+  var quetion = await dbcon("SELECT * FROM quetion ORDER BY code ASC");
+  res.render('quetion_list', { title: 'quetion_list', quetion : quetion});
+});
 module.exports = router;
