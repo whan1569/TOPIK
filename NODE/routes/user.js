@@ -20,4 +20,7 @@ router.post('/user_insert', async function(req, res, next) {
     await dbcon("INSERT INTO user(id,pw) VALUES (?,?);", [id,pw]);
   res.redirect("/");
 });
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'login'});
+});
 module.exports = router;
