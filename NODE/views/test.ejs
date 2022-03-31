@@ -5,7 +5,21 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <a><%=post%></a>
-    <br>
+    <%
+    quetion.forEach(item => {
+    const { code,num1,num2,num3,num4,answ } = item;
+    %>
+    <dl>
+        <dt><%=code%></dt>
+        <img src="/quetion/0<%=code%>.png" alt="My Image">
+        <dd>1.<%=num1%></dd>
+        <dd>2.<%=num2%></dd>
+        <dd>3.<%=num3%></dd>
+        <dd>4.<%=num4%></dd>
+        <dd>정답:<%=answ%></dd>
+        <a href="">삭제</a>
+    </dl>
+    <%})%>
+    <a href="test?num=<%=num%>"><%=num%></a>
   </body>
 </html>

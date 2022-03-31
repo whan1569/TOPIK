@@ -1,4 +1,5 @@
 var express = require('express');
+const dbcon = require("../config/db_con");
 var router = express.Router();
 
 /* GET home page. */
@@ -6,9 +7,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/test', function(req, res, next) {
-  const { post } = req;
-  console.log( post );
-  res.render('test', {post:post});
+router.get('/test',async  function(req, res, next) {
+  num = req.query.num;
+  num++;
+  var a=206000+num;
+  console.log(a);
+  var quetion = await dbcon("SELECT * FROM quetion WHERE code = ?",[a]);
+  res.render('test', {quetion:quetion,num:num});
 });
 module.exports = router;
