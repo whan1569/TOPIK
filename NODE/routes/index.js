@@ -4,8 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  if(!req.session.user_id)
-    console.log(req.session);
+  console.log(req.session);
   res.render('index', { title: 'Express', user_id : req.session.user_id });
 });
 router.get('/logout', function(req, res, next) {
