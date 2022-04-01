@@ -1,5 +1,6 @@
 var express = require('express');
 const dbcon = require("../config/db_con");
+
 var router = express.Router();
 
 /* GET users listing. */
@@ -22,5 +23,16 @@ router.post('/user_insert', async function(req, res, next) {
 });
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'login'});
+});
+router.get('/logout', function(req, res, next) {
+  req.session.destroy(()=>{
+      res.redirect('/');
+  });
+});
+router.post('/login', function(req, res, next) {
+  req.session.user_id = req.body.id;
+  console.log(req.body.id);
+  console.log(req.session);
+  res.redirect("/");
 });
 module.exports = router;

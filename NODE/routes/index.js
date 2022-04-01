@@ -4,7 +4,13 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  if(!req.session.user_id)
+    console.log(req.session);
+  res.render('index', { title: 'Express', user_id : req.session.user_id });
+});
+router.get('/logout', function(req, res, next) {
+  delete req.session.user_id;
+  res.redirect('/');
 });
 
 router.get('/test',async  function(req, res, next) {

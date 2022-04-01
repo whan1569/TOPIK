@@ -11,6 +11,12 @@
     <br>
     <a href="test?num=0">test</a>
     <br>
-    <a href="user/login">login</a>
+    <a>id : <%=user_id%></a>
+    <br>
+    <%if(user_id){%>
+      <a href="user/logout">logout</a>
+    <% }else{%>
+      <a href="user/login">login</a>
+    <%}%>
   </body>
 </html>
