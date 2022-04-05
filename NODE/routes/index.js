@@ -1,5 +1,4 @@
 var express = require('express');
-const session = require('express-session');
 const dbcon = require("../config/db_con");
 var router = express.Router();
 
@@ -22,23 +21,34 @@ router.get('/test',async  function(req, res, next) {
 });
 router.post('/test',async  function(req, res, next) {
   var num = req.query.num++;
-  if(num<50)
+  if(!req.session.test)
+    req.session.test = [];
+  if(req.body.ans==req.session.answ)
+    req.session.test[num]=0;
+  else
+    req.session.test[num]=1;
+  if(num==5)
   {
-    if(!req.session.test)
-     req.session.test = [];
-     console.log(req.session.answ);
-     console.log(req.body.ans);
-    if(req.body.ans==req.session.answ)
-      req.session.test[num]=0;
+    var [result] = await dbcon("SELECT try FROM user WHERE id = ?;", [req.session.user_id]);
+    if(!result.try)
+    {
+      result.try=1;
+      console.log(req.session.user_id);
+      await dbcon("UPDATE user SET try = ? WHERE id = ?;", [result.try, req.session.user_id]);
+    }
     else
-      req.session.test[num]=1;
-    console.log(req.session);
-    num++;
-    res.redirect('test?num='+num);
+      await dbcon("UPDATE user SET try = ? WHERE id = ?;", [++result.try,req.session.user_id]);
+    await dbcon("INSERT INTO test(id_try) VALUES (?);", [req.session.user_id+"_"+result.try]);
+    for(var i=1;i<=5;i++)
+    {
+      await dbcon("UPDATE test SET t? = ?  WHERE id_try = ? ;", [i, req.session.test[i], req.session.user_id+"_"+result.try]);
+    }
+    res.redirect('/');
   }
   else
   {
-    res.redirect('/');
+    num++;
+    res.redirect('test?num='+num);
   }
 });
 module.exports = router;
