@@ -2,10 +2,9 @@ var express = require('express');
 const dbcon = require("../config/db_con");
 var router = express.Router();
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   console.log(req.session);
-  res.render('index', { title: 'Express', user_id : req.session.user_id });
+  res.render('index', { title: 'Dambi Topik', user_id : req.session.user_id });
 });
 router.get('/logout', function(req, res, next) {
   req.session.destroy(function(){ req.session;});  
@@ -16,8 +15,9 @@ router.get('/test',async  function(req, res, next) {
   var num = req.query.num++;
   var a=206000+num;
   var [quetion] = await dbcon("SELECT * FROM quetion WHERE code = ?",[a]);
+  var title=showTitle(num);
   req.session.answ = quetion.answ;
-  res.render('test', {answ : quetion.answ,num1 : quetion.num1, num2 : quetion.num2, num3 : quetion.num3 , num4 : quetion.num4 ,code : quetion.code , num:num});
+  res.render('test', {title:title ,answ : quetion.answ,num1 : quetion.num1, num2 : quetion.num2, num3 : quetion.num3 , num4 : quetion.num4 ,code : quetion.code , num:num});
 });
 router.post('/test',async  function(req, res, next) {
   var num = req.query.num++;
@@ -51,4 +51,72 @@ router.post('/test',async  function(req, res, next) {
     res.redirect('test?num='+num);
   }
 });
+
+function showTitle(a) {
+  if(a<=2)
+  {
+    return "(         )에 들어갈 가장 알맞은 것을 고르십시오.";
+  }
+  else if(a<=4)
+  {
+    return "다음 밑줄 친 부분과 의미가 비슷한 것을 고르십시오.";
+  }
+  else if(a<=8)
+  {
+    return "다음은 무엇에 대한 글인지 고르십시오.";
+  }
+  else if(a<=12)
+  {
+    return "다음 글 또는 그래프의 내용과 같은 것을 고르십시오.";
+  }
+  else if(a<=15)
+  {
+    return "다음을 순서대로 맞게 배열한 것을 고르십시오.";
+  }
+  else if(a<=18)
+  {
+    return "다음을 읽고(         )에 들어갈 내용으로 가장 알맞은 것을 고르십시오.";
+  }
+  else if(a<=24)
+  {
+    return "다음 글을 읽고 물음에 답하십시오.";
+  }
+  else if(a<=27)
+  {
+    return "다음 신문 기사의 제목을 가장 잘 설명한 것을 고르십시오.";
+  }
+  else if(a<=31)
+  {
+    return "다음을 읽고(         )에 들어갈 내용으로 가장 알맞은 것을 고르십시오.";
+  }
+  else if(a<=34)
+  {
+    return "다음을 읽고 내용이 같은 것을 고르십시오.";
+  }
+  else if(a<=38)
+  {
+    return "다음 글의 주제로 가장 알맞은 것을 고르십시오.";
+  }
+  else if(a<=41)
+  {
+    return "다음 글에서 <보기>의 문양이 들어가기에 가장 알맞은 곳을 고르십시오.";
+  }
+  else if(a<=43)
+  {
+    return "다음 글을 읽고 물음에 답하십시오.";
+  }
+  else if(a<=45)
+  {
+    return "다음을 읽고 물음에 답하십시오.";
+  }
+  else if(a<=47)
+  {
+    return "다음 글을 읽고 물음에 답하십시오.";
+  }
+  else if(a<=50)
+  {
+    return "다음을 읽고 물음에 답하십시오";
+  }
+}
+
 module.exports = router;
