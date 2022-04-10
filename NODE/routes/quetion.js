@@ -17,17 +17,17 @@ var upload = multer({ storage: storage });
 router.get('/', function(req, res, next) {
   res.render('quetion', { title: 'quetion' });
 });
-router.get('/quetion_insert', function(req, res, next) {
+router.get('/insert', function(req, res, next) {
   res.render('quetion_insert', { title: 'quetion_insert' });
 });
 
-router.post('/quetion_insert',/* upload.single('file'),*/async function(req, res, next) {
+router.post('/insert',/* upload.single('file'),*/async function(req, res, next) {
   const {code,num1,num2,num3,num4,answ} = req.body;
   await dbcon("INSERT INTO quetion(code,num1,num2,num3,num4,answ) VALUES (?,?,?,?,?,?);", [code,num1,num2,num3,num4,answ]);
   res.redirect("quetion_insert");
 });
 
-router.get('/quetion_list',/* upload.single('file'),*/async function(req, res, next) {
+router.get('/list',/* upload.single('file'),*/async function(req, res, next) {
   var quetion = await dbcon("SELECT * FROM quetion ORDER BY code ASC");
   res.render('quetion_list', { title: 'quetion_list', quetion : quetion});
 });

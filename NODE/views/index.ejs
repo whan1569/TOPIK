@@ -9,16 +9,16 @@
     <br>
     <a href="quetion">quetion</a>
     <br>
-    <a href="test?num=1">test</a>
-    <br>
     <a>id : <%=user_id%></a>
     <br>
     <%if(user_id){%>
       <a href="logout">logout</a>
+      <br>
+      <a href="user/page">mypage</a>
+      <br>
+      <a href="test?num=1">test</a>
     <% }else{%>
-      <a href="user/user_login">login</a>
+      <a href="user/login">login</a>
     <%}%>
-    <a href="user_page">mypage</a>
-    <br>
   </body>
 </html>

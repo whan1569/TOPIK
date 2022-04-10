@@ -5,13 +5,12 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% user.forEach(item => {
-    const { id } = item;
+    <% history.forEach(item => {
+    const { id_try } = item;
     %>
-    <a href="user"><%=id%></a>
+    <a href="/detail"><%=id_try%></a>
     <br>
     <%})%>
-    <a href="user/user_insert">User Insert</a>
     <br>
   </body>
 </html>

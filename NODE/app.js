@@ -8,6 +8,7 @@ var session = require('express-session');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
 var quetionRouter = require('./routes/quetion');
+var testRouter = require('./routes/test');
 
 var app = express();
 // view engine setup
@@ -29,6 +30,7 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
 app.use('/quetion', quetionRouter);
+app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
